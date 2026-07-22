@@ -38,12 +38,14 @@ def fase_spaendinger(p1_w: float, p2_w: float, p3_w: float, u_n: float = 230.0):
         udefineret = False
 
     u_load = [abs(v - v_n) for v in vertices]
+    beroeringsspaending = abs(v_n - (0 + 0j))
 
     return {
         "vertices": vertices,
         "v_o": 0 + 0j,
         "v_n": v_n,
         "u_load": u_load,
+        "beroeringsspaending": beroeringsspaending,
         "linjespaending": u_n * np.sqrt(3),
         "u_n": u_n,
         "udefineret": udefineret,
@@ -56,3 +58,4 @@ if __name__ == "__main__":
     res = fase_spaendinger(10580, 2645, 53)
     for navn, u in zip(["L1", "L2", "L3"], res["u_load"]):
         print(f"{navn}: {u:.1f} V")
+
