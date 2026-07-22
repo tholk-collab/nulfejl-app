@@ -73,6 +73,10 @@ else:
     ax.plot(v_n.real, v_n.imag, "o", color="black", markersize=6)
     ax.text(v_n.real + 8, v_n.imag + 8, "N", fontsize=10, fontweight="bold")
 
+    # Tynd, diskret linje der viser berøringsspændingen (afstand O til N)
+    ax.plot([0, v_n.real], [0, v_n.imag], "-", color="#7C3AED",
+             linewidth=1, alpha=0.5, zorder=1)
+
     for i, (vertex, u_last) in enumerate(zip(res["vertices"], res["u_load"])):
         navn = labels[i]
         farve = farver[navn]
@@ -106,6 +110,12 @@ else:
                     st.error(f"**{navn}** ({p:.0f} W): {u_last:.1f} V ⚠️ uden for normalområde")
                 else:
                     st.success(f"**{navn}** ({p:.0f} W): {u_last:.1f} V")
+
+            beroering = res["beroeringsspaending"]
+            if beroering > 50:
+                st.error(f"**Berøringsspænding** (kabinet mod jord): {beroering:.1f} V ⚠️ over 50V-grænsen")
+            else:
+                st.success(f"**Berøringsspænding** (kabinet mod jord): {beroering:.1f} V")
 
         st.caption(
             "Bemærk: modellen antager rent ohmske laster (varmelegemer, "
