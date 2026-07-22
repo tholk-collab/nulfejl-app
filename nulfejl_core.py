@@ -58,4 +58,3 @@ if __name__ == "__main__":
     res = fase_spaendinger(10580, 2645, 53)
     for navn, u in zip(["L1", "L2", "L3"], res["u_load"]):
         print(f"{navn}: {u:.1f} V")
-
